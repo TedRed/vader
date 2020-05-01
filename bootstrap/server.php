@@ -1,4 +1,5 @@
 <?php
+
 /**
  * React PHP Boiler Plate Api
  *
@@ -31,6 +32,6 @@ $app->get('app.server')->listen(
     $app->get('app.socket')
 );
 
-echo "Server running at http://127.0.0.1:".$app->get('app')->getSocket() . PHP_EOL;
+echo "Server running at http://127.0.0.1:" . $app->get('app')->getSocket() . PHP_EOL;
 
 $loop->run();

@@ -1,6 +1,7 @@
 <?php
+
 /**
- * React PHP Boiler Plate Api
+ * Vader Api - React PHP Event Api
  *
  * @author timothy brown
  * @date 2020-04-21
@@ -19,10 +20,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 $app = $__app = new ContainerBuilder();
 
 /**
- * Register Components
- */
-
-/**
  * App
  */
 $app->register('app', App::class)
@@ -33,8 +30,8 @@ $app->register('app', App::class)
  * Init the router
  */
 $app->register('app.router', RouteCollector::class)
-    ->addArgument(new Std)
-    ->addArgument(new GroupCountBased);
+    ->addArgument(new Std())
+    ->addArgument(new GroupCountBased());
 
 /**
  * Events

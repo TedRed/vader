@@ -1,10 +1,15 @@
 <?php
 
+/**
+ * Vader Api - React PHP Events Api
+ * @author timothy brown
+ * @date 2020-05-02
+ */
+
 namespace Vader\Core;
 
 use App\Http\Events\Event;
 use App\Http\Events\Exception;
-use Vader\Core\Request;
 use FastRoute\RouteCollector;
 
 /**
@@ -30,13 +35,12 @@ class Events
     private $handler;
 
     /**
-     *
+     * @var $eventsDir
      */
     private static $eventsDir = '\\App\\Http\\Events\\';
 
     /**
      * @var bool
-     *
      * @default false
      */
     private static $hasInitiated = false;
@@ -132,13 +136,9 @@ class Events
             $handler = $this->getHandler($name);
             if ($handler instanceof Event) {
                 $handler->setRequest(new Request($request));
-                $response = $handler->fire();
+                //Run middleware
+                return $handler->fire();
             }
-            return new \React\Http\Response(
-                200,
-                array('Content-Type: application/json'),
-                json_encode($response, JSON_THROW_ON_ERROR, 512)
-            );
         });
 
         return $this->router;

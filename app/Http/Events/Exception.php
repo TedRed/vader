@@ -25,9 +25,13 @@ class Exception extends BaseEvent implements Event
      */
     public function fire()
     {
-        return [
-            'code' => $this->exceptionHttpCode,
-            'message' => $this->exceptionMessage
-        ];
+        return new \React\Http\Response(
+            200,
+            array('Content-Type: application/json'),
+            json_encode([
+                'code' => $this->exceptionHttpCode,
+                'message' => $this->exceptionMessage
+            ], JSON_THROW_ON_ERROR, 512)
+        );
     }
 }
