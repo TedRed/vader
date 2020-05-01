@@ -9,14 +9,18 @@ use PHPUnit\Framework\TestCase as PHPUnitTestCase;
  */
 class TestCase extends PHPUnitTestCase
 {
-    protected static $app;
+    public $app;
 
-    public static function setUpBeforeClass(): void
+    protected function setUp(): void
     {
-        /**
-         * Bootstrap App
-         */
-        self::$app = require_once './bootstrap/app.php';
+        $this->app = require './bootstrap/app.php';
+        parent::setUp();
+    }
+
+    protected function tearDown(): void
+    {
+        $this->app = null;
+        parent::tearDown();
     }
 
 }

@@ -61,6 +61,11 @@ class Events
         return $this->events;
     }
 
+    public function getRouter()
+    {
+        return $this->router;
+    }
+
     /**
      * Get Event Handler
      *

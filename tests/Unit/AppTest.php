@@ -15,19 +15,19 @@ class AppTest extends TestCase
 
     public function testCanGetVersionFromApp()
     {
-        $this->assertIsNumeric(parent::$app->get('app')->getVersion(), 'The version is NOT an Numeric!');
+        $this->assertIsNumeric($this->app->get('app')->getVersion(), 'The version is NOT an Numeric!');
     }
 
     public function testCanSetAndGetSocket()
     {
-        $this->assertIsInt(parent::$app->get('app')->getSocket(), 'The socket is NOT an Int!');
+        $this->assertIsInt($this->app->get('app')->getSocket(), 'The socket is NOT an Int!');
     }
 
     public function testCanSetAndGetAppDirectory()
     {
         $this->assertStringContainsString(
             '/app',
-            parent::$app->get('app')->getAppDirectory(),
+            $this->app->get('app')->getAppDirectory(),
             'The app DIR is incorrect'
         );
     }
@@ -36,14 +36,14 @@ class AppTest extends TestCase
     {
         $this->assertInstanceOf(
             RouteCollector::class,
-            parent::$app->get('app')->getRouter(),
+            $this->app->get('app')->getRouter(),
             'Is NOT instance of RouteCollector'
         );
     }
 
     public function testAppHasBeenInitiated()
     {
-        $appState = parent::$app->get('app')->getState();
+        $appState = $this->app->get('app')->getState();
         $this->assertIsArray($appState, 'App state is NOT an array!');
         $this->assertTrue($appState['initiated']);;
     }

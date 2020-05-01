@@ -6,7 +6,6 @@
  *
  */
 
-
 return [
     'identifyYourself' => 'Identity',
     'createBooking' => 'CreateBooking',
