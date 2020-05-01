@@ -8,5 +8,5 @@ namespace App\Http\Events;
  */
 interface Event
 {
-    public function execute();
+    public function fire();
 }

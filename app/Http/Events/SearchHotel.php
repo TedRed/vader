@@ -6,10 +6,10 @@ namespace App\Http\Events;
  * Class Search Hotel
  * @package App\Core\Events
  */
-class SearchHotel implements Event
+class SearchHotel extends BaseEvent implements Event
 {
 
-    public function execute()
+    public function fire()
     {
         return [
             'message' => 'Searching Hotel!!!'

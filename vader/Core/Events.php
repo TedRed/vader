@@ -4,6 +4,7 @@ namespace Vader\Core;
 
 use App\Http\Events\Event;
 use App\Http\Events\Exception;
+use Vader\Core\Request;
 use FastRoute\RouteCollector;
 
 /**
@@ -39,6 +40,11 @@ class Events
      * @default false
      */
     private static $hasInitiated = false;
+
+    /**
+     * @var array
+     */
+    private static $eventInstances = [];
 
     /**
      * Events constructor.
@@ -81,6 +87,10 @@ class Events
 
         $handler = self::$eventsDir . $this->events[$name];
 
+        if (isset(self::$eventInstances[$handler])) {
+            return $this->handler = self::$eventInstances[$handler];
+        }
+
         if ($handler) {
             try {
                 $tmpHandler = new $handler();
@@ -89,18 +99,18 @@ class Events
                     500,
                     'Handler cannot be initiated.'
                 );
-                return false;
+                return $this->handler;
             }
 
             if ($tmpHandler instanceof Event) {
-                $this->handler = $tmpHandler;
+                $this->handler = self::$eventInstances[$handler] = $tmpHandler;
                 self::$hasInitiated = true;
             } else {
                 $this->handler = new Exception(
                     500,
                     'Handler is not instance of \App\Core\Events\Event interface'
                 );
-                return false;
+                return $this->handler;
             }
         }
 
@@ -120,8 +130,9 @@ class Events
     {
         $this->router->get('/{name}', function ($request, $name) {
             $handler = $this->getHandler($name);
-            if ($handler) {
-                $response = $handler->execute();
+            if ($handler instanceof Event) {
+                $handler->setRequest(new Request($request));
+                $response = $handler->fire();
             }
             return new \React\Http\Response(
                 200,

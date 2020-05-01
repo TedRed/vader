@@ -2,7 +2,7 @@
 
 namespace App\Http\Events;
 
-class Exception implements Event
+class Exception extends BaseEvent implements Event
 {
 
     private $exceptionHttpCode;
@@ -23,7 +23,7 @@ class Exception implements Event
     /**
      * Execute
      */
-    public function execute()
+    public function fire()
     {
         return [
             'code' => $this->exceptionHttpCode,

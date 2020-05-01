@@ -12,13 +12,12 @@ namespace App\Http\Events;
  * Class CreateBooking
  * @package App\Core\Events
  */
-class CreateBooking implements Event
+class CreateBooking extends BaseEvent implements Event
 {
-
-    public function execute()
+    public function fire()
     {
         return [
-            'message' => 'Created booking!!!'
+            'message' => 'Create Booking!!!!'
         ];
     }
 }

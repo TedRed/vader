@@ -6,9 +6,9 @@ namespace App\Http\Events;
  * Class Identity
  * @package App\Core\Events
  */
-class Identity implements Event
+class Identity extends BaseEvent implements Event
 {
-    public function execute()
+    public function fire()
     {
         return [
             'message' => 'I am me!. Who the hell are you?'
