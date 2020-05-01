@@ -2,7 +2,7 @@
 
 namespace Vader\Core;
 
-use \App\Http\Events\Event;
+use App\Http\Events\Event;
 use FastRoute\RouteCollector;
 
 /**
@@ -61,7 +61,10 @@ class Events
         return $this->events;
     }
 
-    public function getRouter()
+    /**
+     * @return RouteCollector
+     */
+    public function getRouter(): ?RouteCollector
     {
         return $this->router;
     }
@@ -75,12 +78,12 @@ class Events
     public function getHandler($name)
     {
 
-        $handler = self::$eventsDir.$this->events[$name];
+        $handler = self::$eventsDir . $this->events[$name];
 
-        if($handler){
+        if ($handler) {
             try {
-                $tmpHandler = new $handler;
-            }catch ( \Exception $e){
+                $tmpHandler = new $handler();
+            } catch (\Exception $e) {
                 $this->handler = new \App\Http\Events\Exception(
                     500,
                     'Handler cannot be initiated.'
@@ -88,10 +91,10 @@ class Events
                 return false;
             }
 
-            if($tmpHandler instanceof Event){
-                $this->handler = new $tmpHandler;
+            if ($tmpHandler instanceof Event) {
+                $this->handler = new $tmpHandler();
                 self::$hasInitiated = true;
-            }else{
+            } else {
                 $this->handler = new \App\Http\Events\Exception(
                     500,
                     'Handler is not instance of \App\Core\Events\Event interface'
@@ -100,7 +103,7 @@ class Events
             }
         }
 
-        if(! self::$hasInitiated) {
+        if (! self::$hasInitiated) {
             $this->handler = new \App\Http\Events\Exception(404);
         }
 
@@ -116,7 +119,7 @@ class Events
     {
         $this->router->get('/{name}', function ($request, $name) {
             $handler = $this->getHandler($name);
-            if($handler) {
+            if ($handler) {
                 $handler->execute();
                 $response = $handler->getResponse();
             }
