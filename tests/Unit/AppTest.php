@@ -4,7 +4,7 @@ namespace Tests\Unit;
 
 use Tests\TestCase;
 use App\Core\App;
-use \FastRoute\RouteCollector;
+use FastRoute\RouteCollector;
 
 /**
  * Class AppTest
@@ -45,7 +45,6 @@ class AppTest extends TestCase
     {
         $appState = $this->app->get('app')->getState();
         $this->assertIsArray($appState, 'App state is NOT an array!');
-        $this->assertTrue($appState['initiated']);;
+        $this->assertTrue($appState['initiated']);
     }
-
 }
