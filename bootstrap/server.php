@@ -1,15 +1,16 @@
 <?php
 /**
  * React PHP Boiler Plate Api
+ *
  * @author timothy brown
  * @date 2020-04-21
  */
 
+use Vader\Core\ErrorHandler;
+use Vader\Core\JsonRequestDecoder;
+use Vader\Core\Router;
 use React\Http\Server;
 use React\EventLoop\Factory as EventLoopFactory;
-use App\Core\ErrorHandler;
-use App\Core\JsonRequestDecoder;
-use App\Core\Router;
 
 /**
  * Run the Server

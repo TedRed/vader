@@ -5,7 +5,7 @@
  * @date 2020-04-21
  */
 
-namespace App\Core;
+namespace Vader\Core;
 
 use FastRoute\RouteCollector;
 

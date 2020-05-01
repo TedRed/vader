@@ -6,8 +6,9 @@
  *
  */
 
+
 return [
-    'identifyYourself' => '\App\Http\Events\Identity',
-    'createBooking' => '\App\Http\Events\CreateBooking',
-    'searchHotel' => '\App\Http\Events\SearchHotel'
+    'identifyYourself' => 'Identity',
+    'createBooking' => 'CreateBooking',
+    'searchHotel' => 'SearchHotel'
 ];

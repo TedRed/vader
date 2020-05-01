@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core;
+namespace Vader\Core;
 
 use Psr\Http\Message\ServerRequestInterface;
 use Respect\Validation\Exceptions\NestedValidationException;

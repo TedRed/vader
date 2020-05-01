@@ -6,12 +6,12 @@
  * @date 2020-04-21
  */
 
+use Vader\Core\App;
+use Vader\Core\Events;
 use FastRoute\DataGenerator\GroupCountBased;
 use FastRoute\RouteCollector;
 use FastRoute\RouteParser\Std;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use App\Core\App;
-use App\Core\Events;
 
 /**
  * Create Container

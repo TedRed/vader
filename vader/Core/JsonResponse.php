@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core;
+namespace Vader\Core;
 
 use React\Http\Response;
 

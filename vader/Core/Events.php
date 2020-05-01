@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core;
+namespace Vader\Core;
 
 use \App\Http\Events\Event;
 use FastRoute\RouteCollector;
@@ -26,6 +26,11 @@ class Events
      * @var Event
      */
     private $handler;
+
+    /**
+     *
+     */
+    private static $eventsDir = '\\App\\Http\\Events\\';
 
     /**
      * @var bool
@@ -65,7 +70,7 @@ class Events
     public function getHandler($name)
     {
 
-        $handler = $this->events[$name];
+        $handler = self::$eventsDir.$this->events[$name];
 
         if($handler){
             try {
@@ -79,7 +84,7 @@ class Events
             }
 
             if($tmpHandler instanceof Event){
-                $this->handler = new $handler;
+                $this->handler = new $tmpHandler;
                 self::$hasInitiated = true;
             }else{
                 $this->handler = new \App\Http\Events\Exception(
