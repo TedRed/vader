@@ -8,16 +8,10 @@ namespace App\Http\Events;
  */
 class Identity implements Event
 {
-    public function execute(): void
+    public function execute()
     {
-        // TODO: Implement execute() method.
+        return [
+            'message' => 'I am me!. Who the hell are you?'
+        ];
     }
-
-    public function getResponse(): array
-    {
-       return [
-           'message' => 'I am me!. Who the hell are you?'
-       ];
-    }
-
 }

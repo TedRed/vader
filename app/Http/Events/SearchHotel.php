@@ -9,12 +9,7 @@ namespace App\Http\Events;
 class SearchHotel implements Event
 {
 
-    public function execute(): void
-    {
-
-    }
-
-    public function getResponse(): array
+    public function execute()
     {
         return [
             'message' => 'Searching Hotel!!!'

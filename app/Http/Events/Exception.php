@@ -2,7 +2,8 @@
 
 namespace App\Http\Events;
 
-class Exception implements Event {
+class Exception implements Event
+{
 
     private $exceptionHttpCode;
 
@@ -22,22 +23,11 @@ class Exception implements Event {
     /**
      * Execute
      */
-    public function execute(): void
-    {
-        // TODO: Implement execute() method.
-    }
-
-    /**
-     * Get Response
-     *
-     * @return array
-     */
-    public function getResponse(): array
+    public function execute()
     {
         return [
             'code' => $this->exceptionHttpCode,
             'message' => $this->exceptionMessage
         ];
     }
-
 }

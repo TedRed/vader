@@ -3,6 +3,7 @@
 namespace Vader\Core;
 
 use App\Http\Events\Event;
+use App\Http\Events\Exception;
 use FastRoute\RouteCollector;
 
 /**
@@ -73,7 +74,7 @@ class Events
      * Get Event Handler
      *
      * @param $name
-     * @return Events\Exception|bool|mixed
+     * @return Exception|bool|mixed
      */
     public function getHandler($name)
     {
@@ -84,7 +85,7 @@ class Events
             try {
                 $tmpHandler = new $handler();
             } catch (\Exception $e) {
-                $this->handler = new \App\Http\Events\Exception(
+                $this->handler = new Exception(
                     500,
                     'Handler cannot be initiated.'
                 );
@@ -92,10 +93,10 @@ class Events
             }
 
             if ($tmpHandler instanceof Event) {
-                $this->handler = new $tmpHandler();
+                $this->handler = $tmpHandler;
                 self::$hasInitiated = true;
             } else {
-                $this->handler = new \App\Http\Events\Exception(
+                $this->handler = new Exception(
                     500,
                     'Handler is not instance of \App\Core\Events\Event interface'
                 );
@@ -104,7 +105,7 @@ class Events
         }
 
         if (! self::$hasInitiated) {
-            $this->handler = new \App\Http\Events\Exception(404);
+            $this->handler = new Exception(404);
         }
 
         return $this->handler;
@@ -120,13 +121,12 @@ class Events
         $this->router->get('/{name}', function ($request, $name) {
             $handler = $this->getHandler($name);
             if ($handler) {
-                $handler->execute();
-                $response = $handler->getResponse();
+                $response = $handler->execute();
             }
             return new \React\Http\Response(
                 200,
                 array('Content-Type: application/json'),
-                json_encode($response)
+                json_encode($response, JSON_THROW_ON_ERROR, 512)
             );
         });
 

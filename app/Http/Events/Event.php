@@ -8,7 +8,5 @@ namespace App\Http\Events;
  */
 interface Event
 {
-    public function execute(): void;
-
-    public function getResponse(): array;
+    public function execute();
 }
