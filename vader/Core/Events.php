@@ -52,13 +52,12 @@ class Events
 
     /**
      * Events constructor.
-     *
-     * @param string $events
      * @param RouteCollector $router
+     * @param $appPath
      */
-    public function __construct(string $events, RouteCollector $router)
+    public function __construct(RouteCollector $router, $appPath)
     {
-        $this->events = include $events;
+        $this->events = include $appPath . '/events.php';
         $this->router = $router;
     }
 

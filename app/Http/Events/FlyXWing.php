@@ -13,6 +13,8 @@ class FlyXWing extends BaseEvent implements Event
     {
         $requestParams = $this->request->getParams();
 
+        $configApp = config('app');
+
         switch ($requestParams['command']) {
             case 'all-wings-report-in':
                 $message = 'Red 10 : Red Ten standing by.....  Red 7 :  Red Seven standing by.... ' .
@@ -24,7 +26,7 @@ class FlyXWing extends BaseEvent implements Event
                     'Gold Leader : They\'re coming in! Three marks at 2-10!';
                 break;
             default:
-                $message = 'I copy, Gold Leader.';
+                $message = 'I copy, Gold Leader.' . print_r($configApp, true);
         }
 
         return response([

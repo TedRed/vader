@@ -1,4 +1,5 @@
 <?php
+
 /**
  * React PHP Boiler Plate Api
  * @author timothy brown
@@ -55,6 +56,7 @@ class App
     /**
      * App constructor.
      * @param $roodDir
+     * @param int $socket
      */
     public function __construct($roodDir, $socket = 8080)
     {
@@ -64,9 +66,18 @@ class App
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getAppDirectory()
+    public function getRootDirectory(): ?string
+    {
+        return $this->rootDir;
+    }
+
+
+    /**
+     * @return string|null
+     */
+    public function getAppDirectory(): ?string
     {
         return $this->appDir;
     }
@@ -82,22 +93,24 @@ class App
     /**
      * @return int
      */
-    public function getSocket()
+    public function getSocket(): int
     {
         return $this->socket;
     }
 
-    public function getState()
+    public function getState(): array
     {
-        return ['initiated' => self::$initiated];
+        return [
+            'initiated' => self::$initiated
+        ];
     }
 
     /**
      * @param RouteCollector $router
      */
-    public function setRouter(RouteCollector $router){
+    public function setRouter(RouteCollector $router): void
+    {
         $this->router = $router;
-
         self::$initiated = true;
     }
 

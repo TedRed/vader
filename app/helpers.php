@@ -35,7 +35,12 @@ if (! function_exists('app')) {
 }
 
 if (! function_exists('config')) {
+    /**
+     * @param $name
+     * @return mixed
+     */
     function config($name)
     {
+        return Container::getInstance()->get('app.config')->getConfig($name);
     }
 }

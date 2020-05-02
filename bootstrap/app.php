@@ -8,6 +8,7 @@
  */
 
 use Vader\Core\App;
+use Vader\Core\Config;
 use Vader\Core\Events;
 use FastRoute\DataGenerator\GroupCountBased;
 use FastRoute\RouteCollector;
@@ -41,8 +42,8 @@ $app->register('app.router', RouteCollector::class)
  *
  */
 $app->register('app.events', Events::class)
-    ->addArgument($app->get('app')->getAppDirectory() . '/events.php')
-    ->addArgument($app->get('app.router'));
+    ->addArgument($app->get('app.router'))
+    ->addArgument($app->get('app')->getAppDirectory());
 
 /**
  * Bind the router to return the corresponding event and get its handler
@@ -50,6 +51,14 @@ $app->register('app.events', Events::class)
 $app->get('app')->setRouter(
     $app->get('app.events')->bind()
 );
+
+/**
+ * Config
+ */
+$app->register('app.config', Config::class)
+    ->addArgument($app->get('app')->getRootDirectory());
+
+
 /**
  * Middleware
  */
