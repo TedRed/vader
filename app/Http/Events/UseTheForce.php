@@ -11,10 +11,10 @@ namespace App\Http\Events;
 use Vader\Core\Container;
 
 /**
- * Class CreateBooking
+ * Class UseTheForce
  * @package App\Core\Events
  */
-class CreateBooking extends BaseEvent implements Event
+class UseTheForce extends BaseEvent implements Event
 {
     public function fire()
     {
@@ -25,7 +25,7 @@ class CreateBooking extends BaseEvent implements Event
             200,
             array('Content-Type: application/json'),
             json_encode([
-                'message' => 'Create Booking!!!!' . $app->getVersion()
+                'message' => 'Use the force luke....'
             ], JSON_THROW_ON_ERROR, 512)
         );
     }

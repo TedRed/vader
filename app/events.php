@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Add Events Here
  *
@@ -8,6 +9,7 @@
 
 return [
     'identifyYourself' => 'Identity',
-    'createBooking' => 'CreateBooking',
-    'searchHotel' => 'SearchHotel'
+    'use-the-force' => 'UseTheForce',
+    'fly-x-wing' => 'FlyXWing',
+    'fly-y-wing' => 'FlyYWing'
 ];
