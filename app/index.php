@@ -1,4 +1,5 @@
 <?php
+
 /**
  * React PHP Boiler Plate Api
  * @author timothy brown
@@ -14,6 +15,16 @@ require './vendor/autoload.php';
  * Bootstrap App
  */
 $app = require_once './bootstrap/app.php';
+
+/**
+ * Set the instance in the container
+ */
+\Vader\Core\Container::setInstance($app);
+
+/**
+ * Load Helpers
+ */
+require_once 'helpers.php';
 
 /**
  * Bootstrap Server
