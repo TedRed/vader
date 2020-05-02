@@ -11,12 +11,24 @@ class FlyXWing extends BaseEvent implements Event
 
     public function fire()
     {
-        return new \React\Http\Response(
-            200,
-            array('Content-Type: application/json'),
-            json_encode([
-                'message' => 'Red leader: All wings report in.'
-            ], JSON_THROW_ON_ERROR, 512)
-        );
+        $requestParams = $this->request->getParams();
+
+        switch ($requestParams['command']) {
+            case 'all-wings-report-in':
+                $message = 'Red 10 : Red Ten standing by.....  Red 7 :  Red Seven standing by.... ' .
+                    'Biggs : Red Three standing by.';
+                break;
+            case 'lock-s-foils-in-attack-position':
+                $message = 'Gold Two : The guns - they\'ve stopped!...' .
+                    'Gold Five: Stabilize your rear deflectors... Watch for enemy fighters.....' .
+                    'Gold Leader : They\'re coming in! Three marks at 2-10!';
+                break;
+            default:
+                $message = 'I copy, Gold Leader.';
+        }
+
+        return response([
+            'message' => $message
+        ]);
     }
 }

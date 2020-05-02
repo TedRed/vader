@@ -3,8 +3,19 @@
 use Vader\Core\Container;
 
 if (! function_exists('response')) {
-    function response($body, $code = 200, $header = '')
+    /**
+     * @param $body
+     * @param int $code
+     * @param array $header
+     * @return \React\Http\Response
+     */
+    function response($body, $code = 200, $header = ['Content-Type: application/json'])
     {
+        return new \React\Http\Response(
+            $code,
+            $header,
+            json_encode($body, JSON_THROW_ON_ERROR, 512)
+        );
     }
 }
 

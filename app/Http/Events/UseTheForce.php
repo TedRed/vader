@@ -18,15 +18,21 @@ class UseTheForce extends BaseEvent implements Event
 {
     public function fire()
     {
+        $requestParams = $this->request->getParams();
 
-        $app = app();
+        switch ($requestParams['action']) {
+            case 'mind-control':
+                $message = 'These are not the driods you\'re looking for....';
+                break;
+            case 'physical-force':
+                $message = 'Now, young Skywalker, you will die!';
+                break;
+            default:
+                $message = 'May the force be with you';
+        }
 
-        return new \React\Http\Response(
-            200,
-            array('Content-Type: application/json'),
-            json_encode([
-                'message' => 'Use the force luke....'
-            ], JSON_THROW_ON_ERROR, 512)
-        );
+        return response([
+            'message' => $message
+        ]);
     }
 }
